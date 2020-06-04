@@ -15,10 +15,16 @@ import org.w3c.dom.Text;
 public class PlugNeighbourActivity extends AppCompatActivity {
 
 private ImageView mAvatar;
-private TextView mAboutMe;
 private FloatingActionButton mFavorite;
 private TextView mName;
-private TextView mPresentation;
+private TextView mIdName;
+private TextView mCountry;
+private TextView mPhoneNumber;
+private TextView mInternetLink;
+private TextView mAPropos;
+private TextView mAboutMe;
+
+
 
 
     @Override
@@ -29,8 +35,13 @@ private TextView mPresentation;
         mAvatar = findViewById(R.id.avatar);
         mFavorite = findViewById(R.id.favorite);
         mName =  findViewById(R.id.nameNeighbour);
+        mIdName = findViewById(R.id.name);
+        mCountry = findViewById(R.id.country);
+        mPhoneNumber = findViewById(R.id.phoneNumber);
+        mInternetLink = findViewById(R.id.internetLink);
+        mAPropos = findViewById(R.id.aPropos);
         mAboutMe = findViewById(R.id.aboutMe);
-        mPresentation = findViewById(R.id.presentation);
+
     }
 
     public ImageView getAvatar() {
@@ -41,13 +52,6 @@ private TextView mPresentation;
         mAvatar = avatar;
     }
 
-    public TextView getAboutMe() {
-        return mAboutMe;
-    }
-
-    public void setAboutMe(TextView aboutMe) {
-        mAboutMe = aboutMe;
-    }
 
     public FloatingActionButton getFavorite() {
         return mFavorite;
@@ -65,11 +69,51 @@ private TextView mPresentation;
         mName = name;
     }
 
-    public TextView getPresentation() {
-        return mPresentation;
+    public TextView getIdName() {
+        return mIdName;
     }
 
-    public void setPresentation(TextView presentation) {
-        mPresentation = presentation;
+    public void setIdName(TextView idName) {
+        mIdName = idName;
+    }
+
+    public TextView getCountry() {
+        return mCountry;
+    }
+
+    public void setCountry(TextView country) {
+        mCountry = country;
+    }
+
+    public TextView getPhoneNumber() {
+        return mPhoneNumber;
+    }
+
+    public void setPhoneNumber(TextView phoneNumber) {
+        mPhoneNumber = phoneNumber;
+    }
+
+    public TextView getInternetLink() {
+        return mInternetLink;
+    }
+
+    public void setInternetLink(TextView internetLink) {
+        mInternetLink = internetLink;
+    }
+
+    public TextView getAPropos() {
+        return mAPropos;
+    }
+
+    public void setAPropos(TextView APropos) {
+        mAPropos = APropos;
+    }
+
+    public TextView getAboutMe() {
+        return mAboutMe;
+    }
+
+    public void setAboutMe(TextView aboutMe) {
+        mAboutMe = aboutMe;
     }
 }
