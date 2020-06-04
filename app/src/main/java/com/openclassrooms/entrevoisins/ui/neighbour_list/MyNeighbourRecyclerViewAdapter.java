@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private static final int PLUG_NEIGHBOUR_REQUEST_CODE = 21;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
         mNeighbours = items;
@@ -50,11 +51,14 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             @Override
             public void onClick(View view) {
                 Intent activity_plug_neighbourIntent = new Intent(holder.itemView.getContext(), PlugNeighbourActivity.class);
+                activity_plug_neighbourIntent.putExtra("neighbour", neighbour);
                 holder.itemView.getContext().startActivity(activity_plug_neighbourIntent);
+
             }
         });
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
