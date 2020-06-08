@@ -21,7 +21,7 @@ private TextView mIdName;
 private TextView mCountry;
 private TextView mPhoneNumber;
 private TextView mInternetLink;
-private TextView mAPropos;
+private TextView mAbout;
 private TextView mAboutMe;
 
 
@@ -39,7 +39,7 @@ private TextView mAboutMe;
         mCountry = findViewById(R.id.country);
         mPhoneNumber = findViewById(R.id.phoneNumber);
         mInternetLink = findViewById(R.id.internetLink);
-        mAPropos = findViewById(R.id.aPropos);
+        mAbout = findViewById(R.id.about);
         mAboutMe = findViewById(R.id.aboutMe);
 
     }
@@ -101,12 +101,12 @@ private TextView mAboutMe;
         mInternetLink = internetLink;
     }
 
-    public TextView getAPropos() {
-        return mAPropos;
+    public TextView getAbout() {
+        return mAbout;
     }
 
-    public void setAPropos(TextView APropos) {
-        mAPropos = APropos;
+    public void setAbout(TextView about) {
+        mAbout = about;
     }
 
     public TextView getAboutMe() {
