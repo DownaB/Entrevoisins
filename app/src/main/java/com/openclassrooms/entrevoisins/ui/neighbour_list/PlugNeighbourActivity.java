@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
@@ -54,9 +56,19 @@ private String avatar;
         mCountry.setText(neighbour.getAddress());
         mPhoneNumber.setText(neighbour.getPhoneNumber());
         mAboutMe.setText(neighbour.getAboutMe());
+        Glide.with(this).load(neighbour.getAvatarUrl()).into(mAvatar);
+        mInternetLink.setText(getResources().getString(R.string.facebook)+neighbour.getName());
 
+        mFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
 
     }
+
+
+
 
 }
