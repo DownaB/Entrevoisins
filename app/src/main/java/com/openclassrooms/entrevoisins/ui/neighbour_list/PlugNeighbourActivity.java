@@ -78,8 +78,7 @@ private String avatar;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return (true);
+               onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

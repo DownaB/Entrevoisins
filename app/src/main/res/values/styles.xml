@@ -29,10 +29,5 @@
     <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="Toolbar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:colorBackground">#80FFFFFF</item>
-    </style>
 
 </resources>
