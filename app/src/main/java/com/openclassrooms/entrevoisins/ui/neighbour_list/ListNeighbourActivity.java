@@ -24,6 +24,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
+    ListNeighbourFavorites mNeighbourFavorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ListNeighbourActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
+        mNeighbourFavorites = new ListNeighbourFavorites();
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
