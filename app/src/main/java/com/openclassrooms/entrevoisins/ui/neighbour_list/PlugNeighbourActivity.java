@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ private String avatar;
         setSupportActionBar(findViewById(R.id.toolbar2));
         setupActionBar();
 
+
         mAvatar = findViewById(R.id.avatar);
         mFavorite = findViewById(R.id.favorite);
         mName =  findViewById(R.id.nameNeighbour);
@@ -72,7 +74,9 @@ private String avatar;
 
     private void setupActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
