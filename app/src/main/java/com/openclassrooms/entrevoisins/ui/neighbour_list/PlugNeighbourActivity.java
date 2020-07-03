@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.w3c.dom.Text;
 
@@ -33,6 +35,7 @@ private TextView mInternetLink;
 private TextView mAboutMe;
 private Neighbour neighbour;
 private String avatar;
+private NeighbourApiService mApiService;
 
 
 
@@ -66,7 +69,7 @@ private String avatar;
         mFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            mApiService = DI.getNeighbourApiService();
             }
         });
 
