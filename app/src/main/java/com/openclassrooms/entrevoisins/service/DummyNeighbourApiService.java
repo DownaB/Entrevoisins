@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.NeighbourFavoriteFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 public class DummyNeighbourApiService implements  NeighbourApiService {
 
     private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
-
+    private ArrayList favorite = new ArrayList();
 
     /**
      * {@inheritDoc}
@@ -46,15 +47,27 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     @Override
     public List<Neighbour> getFavoriteNeighbours() {
 
-    return neighbours;
+        return favorite;
     }
+
     @Override
-    public void deleteFavoriteNeighbours(Neighbour neighbour){
-        neighbours.remove(neighbour);
+    public void deleteFavoriteNeighbours(Neighbour neighbour) {
+        for (int i = 0; i < favorite.size(); i--) {
+            if (neighbour.getFavorite() == false) {
+                neighbours.remove(neighbour);
+            }
+        }
     }
+
     @Override
-    public void addFavoriteNeighbours(Neighbour neighbour){
-        neighbours.add(neighbour);
+    public void addFavoriteNeighbours(Neighbour neighbour) {
+
+
+        for (int i = 0; i < favorite.size(); i++) {
+            if (neighbour.getFavorite() == true) {
+                neighbours.add(neighbour);
+            }
+        }
 
     }
 }
