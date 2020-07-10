@@ -17,6 +17,7 @@ import com.bumptech.glide.RequestBuilder;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.w3c.dom.Text;
@@ -70,6 +71,8 @@ private NeighbourApiService mApiService;
             @Override
             public void onClick(View view) {
             mApiService = DI.getNeighbourApiService();
+            mApiService.addFavoriteNeighbours(neighbour);
+
             }
         });
 

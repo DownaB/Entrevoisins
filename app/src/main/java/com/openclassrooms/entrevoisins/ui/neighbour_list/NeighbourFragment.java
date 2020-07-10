@@ -22,11 +22,9 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 
-public class NeighbourFragment extends Fragment {
+public class NeighbourFragment extends NeighbourAbstractFragment {
 
-    private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
-    private RecyclerView mRecyclerView;
+
 
 
     /**
@@ -39,55 +37,9 @@ public class NeighbourFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mApiService = DI.getNeighbourApiService();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
-        Context context = view.getContext();
-        mRecyclerView = (RecyclerView) view;
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        return view;
-    }
-
-    /**
-     * Init the List of neighbours
-     */
-    private void initList() {
+    public void loadNeighbour() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initList();
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
-
-    /**
-     * Fired if the user clicks on a delete button
-     * @param event
-     */
-    @Subscribe
-    public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        mApiService.deleteNeighbour(event.neighbour);
-        initList();
-    }
 }
