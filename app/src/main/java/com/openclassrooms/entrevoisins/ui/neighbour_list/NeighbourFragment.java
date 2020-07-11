@@ -24,9 +24,6 @@ import java.util.List;
 
 public class NeighbourFragment extends NeighbourAbstractFragment {
 
-
-
-
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
@@ -37,8 +34,8 @@ public class NeighbourFragment extends NeighbourAbstractFragment {
     }
 
     @Override
-    public void loadNeighbour() {
-        mNeighbours = mApiService.getNeighbours();
+    protected List<Neighbour> loadNeighbour() {
+        return mApiService.getNeighbours();
     }
 
 

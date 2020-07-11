@@ -65,8 +65,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         }
 
     }
-
-
     @Override
     public void addFavoriteNeighbours(Neighbour neighbour) {
             for (final Neighbour theNeighbour : neighbours){

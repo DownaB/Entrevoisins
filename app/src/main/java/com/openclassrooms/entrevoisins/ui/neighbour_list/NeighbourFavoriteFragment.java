@@ -31,8 +31,8 @@ public class NeighbourFavoriteFragment extends NeighbourAbstractFragment {
     }
 
     @Override
-    public void loadNeighbour() {
-        mNeighbours = mApiService.getFavoriteNeighbours();
+    protected List<Neighbour> loadNeighbour() {
+        return mApiService.getFavoriteNeighbours();
     }
 
 
