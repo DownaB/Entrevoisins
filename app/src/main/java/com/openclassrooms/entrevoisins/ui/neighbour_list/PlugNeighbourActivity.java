@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -72,6 +73,9 @@ private NeighbourApiService mApiService;
             public void onClick(View view) {
             mApiService = DI.getNeighbourApiService();
             mApiService.addFavoriteNeighbours(neighbour);
+            mFavorite.setBackgroundTintList(getResources().getColorStateList(R.color.colorGrey));
+                Toast.makeText(this,"Ajouté aux favoris", Toast.LENGTH_SHORT).show();
+
 
             }
         });

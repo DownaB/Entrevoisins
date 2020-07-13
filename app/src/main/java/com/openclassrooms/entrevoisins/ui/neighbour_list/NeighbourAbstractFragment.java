@@ -53,7 +53,7 @@ abstract public class NeighbourAbstractFragment extends Fragment {
         mNeighbours = loadNeighbour();
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
     }
-    protected abstract List<Neighbour> loadNeighbour();
+    protected abstract List<Neighbour>loadNeighbour();
 
 
     @Override
