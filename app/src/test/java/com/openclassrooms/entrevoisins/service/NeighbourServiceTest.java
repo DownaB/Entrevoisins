@@ -3,12 +3,14 @@ package com.openclassrooms.entrevoisins.service;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
@@ -44,10 +46,13 @@ public class NeighbourServiceTest {
 
     @Test
     public void getNeighboursFavoriteWithSuccess() {
-        List<Neighbour> neighbours = service.getFavoriteNeighbours();
-        List<Neighbour> expectedNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-        assertThat(neighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        List<Neighbour> neighbourActual = new ArrayList<>();
+        List<Neighbour> neighbourExpected = new ArrayList<>();
+        neighbourActual = service.getFavoriteNeighbours();
+        neighbourExpected = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
+        assertThat(neighbourActual, IsIterableContainingInAnyOrder.containsInAnyOrder(neighbourExpected.toArray()));
     }
+
 
     @Test
     public void addNeighboursFavoriteWithSuccess() {
@@ -57,6 +62,8 @@ public class NeighbourServiceTest {
     }
 
     @Test
+
+
     public void deleteNeighboursFavoriteWithSuccess() {
         Neighbour neighbourToDelete = service.getFavoriteNeighbours();
         service.deleteFavoriteNeighbours(neighbourToDelete)

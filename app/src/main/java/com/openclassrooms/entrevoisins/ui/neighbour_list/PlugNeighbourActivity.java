@@ -73,8 +73,8 @@ private NeighbourApiService mApiService;
             public void onClick(View view) {
             mApiService = DI.getNeighbourApiService();
             mApiService.addFavoriteNeighbours(neighbour);
-            mFavorite.setBackgroundTintList(getResources().getColorStateList(R.color.colorGrey));
-                Toast.makeText(this,"Ajouté aux favoris", Toast.LENGTH_SHORT).show();
+            mFavorite.setImageResource(android.R.drawable.star_big_off  );
+                Toast.makeText(PlugNeighbourActivity.this,"Ajouté aux favoris", Toast.LENGTH_SHORT).show();
 
 
             }
