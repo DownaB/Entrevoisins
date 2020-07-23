@@ -1,6 +1,8 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
@@ -19,6 +21,10 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -67,5 +73,20 @@ public class NeighboursListTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+    }
+
+    @Test
+    public void checkIfClickNeighbour_NewActivityLaunched() {
+        onView(withId(R.id.list_neighbours)).perform(ViewActions.click()).check(matches(withId(R.layout.activity_plug_neighbour)));
+    }
+
+    @Test
+    public void checkTextView_shouldFull() {
+        onView(withId(R.layout.activity_plug_neighbour)).check(matches(withText(R.id.nameNeighbour)));
+    }
+
+    @Test
+    public void checkFavoriteTab_Contains_FavoriteNeighbour() {
+        onView(withId(R.id.tabItem2)).check(matches(withSpinnerText(android.R.drawable.star_big_on)));
     }
 }

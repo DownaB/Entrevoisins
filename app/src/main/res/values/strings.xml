@@ -6,4 +6,6 @@
     <string name="a_props_de_moi">A propos de moi </string>
     <string name="avatar">Avatar</string>
     <string name="facebook">www.facebook.fr/</string>
+    <string name="favoris">Ajouté aux favoris</string>
+
 </resources>

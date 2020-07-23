@@ -12,7 +12,9 @@ import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -46,28 +48,21 @@ public class NeighbourServiceTest {
 
     @Test
     public void getNeighboursFavoriteWithSuccess() {
-        List<Neighbour> neighbourActual = new ArrayList<>();
-        List<Neighbour> neighbourExpected = new ArrayList<>();
-        neighbourActual = service.getFavoriteNeighbours();
-        neighbourExpected = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
-        assertThat(neighbourActual, IsIterableContainingInAnyOrder.containsInAnyOrder(neighbourExpected.toArray()));
-    }
+        Neighbour neighbour = service.addFavoriteNeighbours().get(0);
+        neighbour.setFavorite(true);
+        assertEquals(1,service.addFavoriteNeighbours().size());
+        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getId).collect(Collectors.toList()).contains(neighbour.getId()));
+        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getName).collect(Collectors.toList()).contains(neighbour.getName()));
+        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getAvatarUrl).collect(Collectors.toList()).contains(neighbour.getAvatarUrl()));
+        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getAddress).collect(Collectors.toList()).contains(neighbour.getAddress()));
+        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getPhoneNumber).collect(Collectors.toList()).contains(neighbour.getPhoneNumber()));
 
-
-    @Test
-    public void addNeighboursFavoriteWithSuccess() {
-        Neighbour addNeighbour = service.getFavoriteNeighbours();
-        service.addFavoriteNeighbours(addNeighbour);
-        assertTrue(service.getNeighbours().contains(addNeighbour));
     }
 
     @Test
-
-
     public void deleteNeighboursFavoriteWithSuccess() {
-        Neighbour neighbourToDelete = service.getFavoriteNeighbours();
-        service.deleteFavoriteNeighbours(neighbourToDelete)
-        assertFalse(service.getNeighbours().contains(neighbourToDelete));
+        Neighbour neighbour = service.getFavoriteNeighbours().get(0);
+        assertEquals(1,service.getFavoriteNeighbours().size());
     }
 }
 }

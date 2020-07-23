@@ -1,6 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
+import android.support.annotation.StringRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.NavUtils;
@@ -67,14 +68,17 @@ private NeighbourApiService mApiService;
         mAboutMe.setText(neighbour.getAboutMe());
         Glide.with(this).load(neighbour.getAvatarUrl()).into(mAvatar);
         mInternetLink.setText(getResources().getString(R.string.facebook)+neighbour.getName());
+        if(neighbour.getFavorite()==true){
+            mFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+        }
 
         mFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             mApiService = DI.getNeighbourApiService();
             mApiService.addFavoriteNeighbours(neighbour);
-            mFavorite.setImageResource(android.R.drawable.star_big_off  );
-                Toast.makeText(PlugNeighbourActivity.this,"Ajouté aux favoris", Toast.LENGTH_SHORT).show();
+            mFavorite.setImageResource(android.R.drawable.btn_star_big_on  );
+                Toast.makeText(PlugNeighbourActivity.this,getResources().getString(R.string.favoris), Toast.LENGTH_SHORT).show();
 
 
             }
