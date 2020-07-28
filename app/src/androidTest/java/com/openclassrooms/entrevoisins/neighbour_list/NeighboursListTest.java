@@ -77,12 +77,18 @@ public class NeighboursListTest {
 
     @Test
     public void checkIfClickNeighbour_NewActivityLaunched() {
-        onView(withId(R.id.list_neighbours)).perform(ViewActions.click()).check(matches(withId(R.layout.activity_plug_neighbour)));
+        onView(withId(R.id.list_neighbours)).perform(ViewActions.click());
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(1));
+        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(-1));
+        onView((withId(R.layout.activity_plug_neighbour)));
     }
 
     @Test
     public void checkTextView_shouldFull() {
-        onView(withId(R.layout.activity_plug_neighbour)).check(matches(withText(R.id.nameNeighbour)));
+        onView(withId(R.id.favorite)).perform(ViewActions.click());
+        onView(withId(R.id.nameNeighbour)).check(matches(withText("Chloé")));
+        onView(withId(android.R.id.home)).perform(ViewActions.click());
     }
 
     @Test

@@ -48,14 +48,14 @@ public class NeighbourServiceTest {
 
     @Test
     public void getNeighboursFavoriteWithSuccess() {
-        Neighbour neighbour = service.addFavoriteNeighbours().get(0);
-        neighbour.setFavorite(true);
-        assertEquals(1,service.addFavoriteNeighbours().size());
-        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getId).collect(Collectors.toList()).contains(neighbour.getId()));
-        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getName).collect(Collectors.toList()).contains(neighbour.getName()));
-        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getAvatarUrl).collect(Collectors.toList()).contains(neighbour.getAvatarUrl()));
-        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getAddress).collect(Collectors.toList()).contains(neighbour.getAddress()));
-        assertTrue(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.stream().map(Neighbour::getPhoneNumber).collect(Collectors.toList()).contains(neighbour.getPhoneNumber()));
+        Neighbour neighbour = service.getNeighbours().get(0);
+        service.addFavoriteNeighbours(neighbour);
+        assertEquals(1,service.getFavoriteNeighbours().size());
+        assertTrue(service.getFavoriteNeighbours().stream().map(Neighbour::getId).collect(Collectors.toList()).contains(neighbour.getId()));
+        assertTrue(service.getFavoriteNeighbours().stream().map(Neighbour::getName).collect(Collectors.toList()).contains(neighbour.getName()));
+        assertTrue(service.getFavoriteNeighbours().stream().map(Neighbour::getAvatarUrl).collect(Collectors.toList()).contains(neighbour.getAvatarUrl()));
+        assertTrue(service.getFavoriteNeighbours().stream().map(Neighbour::getAddress).collect(Collectors.toList()).contains(neighbour.getAddress()));
+        assertTrue(service.getFavoriteNeighbours().stream().map(Neighbour::getPhoneNumber).collect(Collectors.toList()).contains(neighbour.getPhoneNumber()));
 
     }
 
@@ -65,5 +65,5 @@ public class NeighbourServiceTest {
         assertEquals(1,service.getFavoriteNeighbours().size());
     }
 }
-}
-}
+
+
