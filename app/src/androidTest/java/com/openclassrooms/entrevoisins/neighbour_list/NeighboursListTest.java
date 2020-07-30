@@ -22,6 +22,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -77,22 +78,25 @@ public class NeighboursListTest {
 
     @Test
     public void checkIfClickNeighbour_NewActivityLaunched() {
-        onView(withId(R.id.list_neighbours)).perform(ViewActions.click());
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(1));
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(-1));
-        onView((withId(R.layout.activity_plug_neighbour)));
+        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
+        onView(withId(R.id.maincontainer)).check(matches(isDisplayed()));
+        onView(withId(R.id.nameNeighbour)).check(matches(withText("Chloé")));
     }
 
     @Test
     public void checkTextView_shouldFull() {
+        onView(ViewMatchers.withId(R.id.maincontainer)).check(matches(withId(android.R.drawable.star_big_off)));
         onView(withId(R.id.favorite)).perform(ViewActions.click());
-        onView(withId(R.id.nameNeighbour)).check(matches(withText("Chloé")));
+        onView(ViewMatchers.withId(R.id.maincontainer)).check(matches(withId(android.R.drawable.star_big_on)));
         onView(withId(android.R.id.home)).perform(ViewActions.click());
     }
 
     @Test
     public void checkFavoriteTab_Contains_FavoriteNeighbour() {
-        onView(withId(R.id.tabItem2)).check(matches(withSpinnerText(android.R.drawable.star_big_on)));
+        onView(withId(R.id.tabItem2)).perform(ViewActions.click());
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(1));
+        onView(ViewMatchers.withId(R.id.list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(0));
     }
 }
