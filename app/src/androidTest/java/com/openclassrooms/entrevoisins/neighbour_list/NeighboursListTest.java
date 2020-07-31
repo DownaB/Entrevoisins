@@ -8,6 +8,7 @@ import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
@@ -97,7 +98,8 @@ public class NeighboursListTest {
         Espresso.pressBack();
         onView(withId(R.id.main_content)).perform(ViewActions.swipeLeft());
       onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(1));
-      onView(withId(R.id.item_list_delete_button)).perform(ViewActions.click());
+      onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
+              .perform(RecyclerViewActions.actionOnItemAtPosition(0,new DeleteViewAction()));
       onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(0));
     }
 }
