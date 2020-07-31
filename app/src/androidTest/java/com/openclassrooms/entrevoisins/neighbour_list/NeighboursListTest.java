@@ -1,6 +1,7 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
@@ -12,6 +13,7 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -58,7 +60,7 @@ public class NeighboursListTest {
     @Test
     public void myNeighboursList_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and click on it.
-        onView(ViewMatchers.withId(R.id.list_neighbours))
+        onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
@@ -68,35 +70,34 @@ public class NeighboursListTest {
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
         // Given : We remove the element at position 2
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
+        onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
-        onView(ViewMatchers.withId(R.id.list_neighbours))
+        onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+        onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(ITEMS_COUNT-1));
     }
 
     @Test
     public void checkIfClickNeighbour_NewActivityLaunched() {
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
+        onView(withId(R.id.main_content)).perform(ViewActions.swipeRight());
+        onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
         onView(withId(R.id.maincontainer)).check(matches(isDisplayed()));
-        onView(withId(R.id.nameNeighbour)).check(matches(withText("Chloé")));
+        onView(withId(R.id.nameNeighbour)).check(matches(withText("Jack")));
+        Espresso.pressBack();
     }
 
     @Test
-    public void checkTextView_shouldFull() {
-        onView(ViewMatchers.withId(R.id.maincontainer)).check(matches(withId(android.R.drawable.star_big_off)));
+    public void checkTextView_shouldFull_checkFavoriteTab_Contains_FavoriteNeighbour() {
+        onView(withId(R.id.main_content)).perform(ViewActions.swipeRight());
+        onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1,ViewActions.click()));
         onView(withId(R.id.favorite)).perform(ViewActions.click());
-        onView(ViewMatchers.withId(R.id.maincontainer)).check(matches(withId(android.R.drawable.star_big_on)));
-        onView(withId(android.R.id.home)).perform(ViewActions.click());
-    }
-
-    @Test
-    public void checkFavoriteTab_Contains_FavoriteNeighbour() {
-        onView(withId(R.id.tabItem2)).perform(ViewActions.click());
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(1));
-        onView(ViewMatchers.withId(R.id.list_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(0));
+        Espresso.pressBack();
+        onView(withId(R.id.main_content)).perform(ViewActions.swipeLeft());
+      onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(1));
+      onView(withId(R.id.item_list_delete_button)).perform(ViewActions.click());
+      onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(0));
     }
 }
