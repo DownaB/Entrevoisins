@@ -26,7 +26,7 @@ import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
-public class PlugNeighbourActivity extends AppCompatActivity implements Serializable {
+public class PlugNeighbourActivity extends AppCompatActivity  {
 
 private ImageView mAvatar;
 private FloatingActionButton mFavorite;
