@@ -70,20 +70,26 @@ private NeighbourApiService mApiService;
         mInternetLink.setText(getResources().getString(R.string.facebook)+neighbour.getName());
         if(neighbour.getFavorite()==true){
             mFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+
         }
 
         mFavorite.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
             mApiService = DI.getNeighbourApiService();
-            mApiService.addFavoriteNeighbours(neighbour);
-            mFavorite.setImageResource(android.R.drawable.btn_star_big_on  );
+            if(mFavorite.setImageResource(android.R.drawable.star_big_off)){
+                mApiService.addFavoriteNeighbours(neighbour);
+                mFavorite.setImageResource(android.R.drawable.btn_star_big_on  );
                 Toast.makeText(PlugNeighbourActivity.this,getResources().getString(R.string.favoris), Toast.LENGTH_SHORT).show();
-
-
             }
-        });
+            else(mFavorite.setImageResource(android.R.drawable.btn_star_big_on)){
+                mApiService.deleteFavoriteNeighbours(neighbour);
+                mFavorite.setImageResource(android.R.drawable.star_big_off);
+                Toast.makeText(PlugNeighbourActivity.this,getResources().getString(R.string.supprimé), Toast.LENGTH_SHORT).show();
+            }
 
+        });
     }
 
     private void setupActionBar() {

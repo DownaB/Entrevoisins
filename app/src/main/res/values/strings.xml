@@ -7,5 +7,6 @@
     <string name="avatar">Avatar</string>
     <string name="facebook">www.facebook.fr/</string>
     <string name="favoris">Ajouté aux favoris</string>
+    <string name="supprimé">Supprimé des favoris</string>
 
 </resources>
