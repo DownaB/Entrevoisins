@@ -70,7 +70,6 @@ private NeighbourApiService mApiService;
         mInternetLink.setText(getResources().getString(R.string.facebook)+neighbour.getName());
         if(neighbour.getFavorite()==true){
             mFavorite.setImageResource(android.R.drawable.btn_star_big_on);
-
         }
 
         mFavorite.setOnClickListener(new View.OnClickListener() {
@@ -78,18 +77,22 @@ private NeighbourApiService mApiService;
             @Override
             public void onClick(View view) {
             mApiService = DI.getNeighbourApiService();
-            if(mFavorite.setImageResource(android.R.drawable.star_big_off)){
+            if (neighbour.getFavorite()==false) {
                 mApiService.addFavoriteNeighbours(neighbour);
-                mFavorite.setImageResource(android.R.drawable.btn_star_big_on  );
-                Toast.makeText(PlugNeighbourActivity.this,getResources().getString(R.string.favoris), Toast.LENGTH_SHORT).show();
-            }
-            else(mFavorite.setImageResource(android.R.drawable.btn_star_big_on)){
+                neighbour.setFavorite(true);
+                mFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+                Toast.makeText(PlugNeighbourActivity.this, getResources().getString(R.string.favoris), Toast.LENGTH_SHORT).show();
+            }else {
                 mApiService.deleteFavoriteNeighbours(neighbour);
-                mFavorite.setImageResource(android.R.drawable.star_big_off);
-                Toast.makeText(PlugNeighbourActivity.this,getResources().getString(R.string.supprimé), Toast.LENGTH_SHORT).show();
+                neighbour.setFavorite(false);
+                mFavorite.setImageResource(android.R.drawable.btn_star_big_off);
+                Toast.makeText(PlugNeighbourActivity.this, getResources().getString(R.string.supprimé), Toast.LENGTH_SHORT).show();
             }
 
+
+            }
         });
+
     }
 
     private void setupActionBar() {

@@ -60,7 +60,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     public void deleteFavoriteNeighbours(Neighbour neighbour) {
         for (final Neighbour theNeighbour : neighbours){
             if (theNeighbour.getId() == neighbour.getId()){
-                neighbour.setFavorite(false);
+                theNeighbour.setFavorite(false);
             }
         }
 

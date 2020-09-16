@@ -96,12 +96,9 @@ public class NeighboursListTest {
         onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1,ViewActions.click()));
         onView(withId(R.id.favorite)).perform(ViewActions.click());
-        onView(withId(R.id.favorite)).check(matches(withId(android.R.drawable.btn_star_big_on)));
         Espresso.pressBack();
         onView(withId(R.id.main_content)).perform(ViewActions.swipeLeft());
       onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours))).check(withItemCount(1));
-      onView(withId(R.id.favorite)).perform(ViewActions.click());
-      onView(withId(R.id.favorite)).check(matches(withId(android.R.drawable.btn_star_big_off)));
       onView(Matchers.allOf(isDisplayed(),ViewMatchers.withId(R.id.list_neighbours)))
               .perform(RecyclerViewActions.actionOnItemAtPosition(0,new DeleteViewAction()));
       ITEMS_COUNT--;
